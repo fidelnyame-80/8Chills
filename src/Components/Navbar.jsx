@@ -22,7 +22,7 @@ const Navbar = () => {
 <div className='flex space-x-[0rem] lg:space-x-[10rem] lg:mx-20'>
                 <div className='mx-5'>
                     {/* logo */}
-                    <img src={Images.logo1} alt="" className='w-30 h-25 object-cover lg:w-15 lg:h-20' />
+                    <img src={Images.logo2} alt="" className='w-30 h-25 object-cover lg:w-15 lg:h-20' />
                 </div>
 
                 <div className='hidden lg:block md:block place-self-center ml-30'>
@@ -70,7 +70,7 @@ const Navbar = () => {
 
             
         </div>
-             <div className='absolute w-full h-20 lg:h-15 mt-2 backdrop-blur lg:bg-white/25 z-10 rounded-full bg-white/20'></div>
+             {/* <div className='absolute w-full h-20 lg:h-15 mt-2 backdrop-blur lg:bg-white/25 z-10 rounded-full bg-white/20'></div> */}
 
         </div>
         
