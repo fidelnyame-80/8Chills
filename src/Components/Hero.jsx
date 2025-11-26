@@ -16,7 +16,7 @@ const Hero = () => {
 
     return (
         <>
-        <div className='relative w-full h-[100vh]'>
+        <div className='relative w-full h-[80vh]'>
              {/* Navbar inside hero */}
             <div className="absolute top-0 left-0 w-full z-30 ">
                 <Navbar />
