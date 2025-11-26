@@ -16,7 +16,7 @@ const Hero = () => {
 
     return (
         <>
-        <div className='relative w-full h-[80vh]'>
+        <div className='relative w-full h-[100vh]'>
              {/* Navbar inside hero */}
             <div className="absolute top-0 left-0 w-full z-30 ">
                 <Navbar />
@@ -126,19 +126,19 @@ const Hero = () => {
 
             </Swiper>
 
-           {/* Beautiful responsive wave that hides on large screens */}
-<div className="lg:hidden pointer-events-none">
-  <svg
-    viewBox="0 0 1440 320"
-    className="w-full h-32 md:h-48 -mb-1"
-    preserveAspectRatio="none"
-  >
-    <path
-      fill="#ffffff"   // ← change to your next section's background color
-      d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,176C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-    />
-  </svg>
-</div>
+            <div 
+    className="absolute inset-x-0 top-[40rem] lg:hidden z-10 h-48 lg:h-30 pointer-events-none "
+    style={{
+    background: 'white', // ← still match your next section’s background
+    maskImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 1440 180%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath fill=%27black%27 d=%27M0,100 Q90,70 200,105 Q320,140 460,95 Q600,60 740,110 Q880,145 1020,100 Q1160,65 1300,115 L1440,125 L1440,180 L0,180 Z%27/%3E%3Cpath fill=%27none%27 stroke=%27%23332%27 stroke-width=%2740%27 opacity=%270.15%27 d=%27M0,100 Q90,70 200,105 Q320,140 460,95 Q600,60 740,110 Q880,145 1020,100 Q1160,65 1300,115 L1440,125%27 stroke-linecap=%22round%22/%3E%3C/svg%3E")',
+    maskSize: '100% 100%',
+    maskRepeat: 'no-repeat',
+    maskPosition: 'bottom',
+      // Optional: soft blurred edge
+      maskMode: 'alpha',
+      WebkitMaskImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 1200 120%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M0,0 Q300,80 600,40 Q900,0 1200,80 L1200,120 L0,120 Z%27 fill=%27black%27/%3E%3C/svg%3E")',
+    }}
+  />
   {/* <div className='lg:absolute absolute lg:bg-black/80 bg-black/80 lg:z-10 z-10 lg:w-full w-full lg:h-5 h-5 lg:blur-xl blur-xl lg:top-100 top-175'></div> */}
         </div>
             
