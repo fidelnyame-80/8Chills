@@ -166,7 +166,7 @@ const products = [
             >
               <div className="absolute inset-0 bg-black/30"></div>
 
-              <div className="relative p-6 sm:p-8 flex flex-col justify-between h-full">
+              <div className="relative p-6 p-8 flex flex-col justify-between h-full">
                 <div>
                   <h2 className="mt-3 lg:mt-1 sm:mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
                     LIVE YOUR MOMENT
@@ -184,7 +184,7 @@ const products = [
               <img
                 src={Images.henessy}
                 alt="Hennessy bottle"
-                className="absolute bottom-20 right-0 w-54 h-70 lg:w-60 lg:h-60 -translate-x-1 lg:mr-5   drop-shadow-2xl object-contain pointer-events-none object-cover mr-1 lg:mb-2"
+                className="absolute bottom-30 right-2 w-44 h-50 lg:w-60 lg:h-60 -translate-x-1 lg:mr-5   drop-shadow-2xl object-contain pointer-events-none object-cover mr-1 lg:mb-2"
               />
             </motion.div>
 
@@ -222,7 +222,7 @@ const products = [
                 <img
                   src={Images.blackLabel}
                   alt="Johnnie Walker Black Label"
-                  className="absolute bottom-20 right-0 w-52 h-70 lg:w-60 -translate-x-1   drop-shadow-2xl object-contain pointer-events-none object-cover mr-1"
+                  className="absolute bottom-30 right-2 w-44 h-50 lg:w-60 -translate-x-1   drop-shadow-2xl object-contain pointer-events-none object-cover mr-1"
                 />
               </div>
             </motion.div>
