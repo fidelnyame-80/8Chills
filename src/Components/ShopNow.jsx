@@ -9,7 +9,7 @@ const ShopNowButton = ({bg}) => {
       style={{ backgroundImage: `url(${bg})`}} // replace with your image
     >
       {/* Text */}
-      <span style={{ fontFamily: 'Lucida Handwriting, cursive' }} className='text-[1.2rem] font-[900]'>SHOP NOW</span>
+      <span style={{ fontFamily: 'Lucida Handwriting, cursive', fontWeight:900 }} className='text-[1.2rem] font-[900]'>SHOP NOW</span>
 
       {/* Arrow */}
       <span className=" flex items-center justify-center w-8 h-8 bg-white rounded-full">
