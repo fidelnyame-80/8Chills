@@ -127,7 +127,7 @@ const Hero = () => {
             </Swiper>
 
             <div 
-    className="absolute inset-x-0 top-[41rem] lg:hidden z-10 h-48 lg:h-30 pointer-events-none "
+    className="absolute inset-x-0 top-[39rem] lg:hidden z-10 h-56 lg:h-30 pointer-events-none "
     style={{
     background: 'white', // ← still match your next section’s background
     maskImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 1440 180%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath fill=%27black%27 d=%27M0,100 Q90,70 200,105 Q320,140 460,95 Q600,60 740,110 Q880,145 1020,100 Q1160,65 1300,115 L1440,125 L1440,180 L0,180 Z%27/%3E%3Cpath fill=%27none%27 stroke=%27%23332%27 stroke-width=%2740%27 opacity=%270.15%27 d=%27M0,100 Q90,70 200,105 Q320,140 460,95 Q600,60 740,110 Q880,145 1020,100 Q1160,65 1300,115 L1440,125%27 stroke-linecap=%22round%22/%3E%3C/svg%3E")',
