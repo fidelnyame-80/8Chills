@@ -6,7 +6,7 @@ const ShopNowButton = ({bg}) => {
   return (
     <button
       className="relative flex items-center justify-between px-2  bg-cover bg-center text-black font-bold text-lg rounded-xl w-[12rem] h-[3rem] shadow-xl "
-      style={{ backgroundImage: `url(${bg})`}} // replace with your image
+      style={{ backgroundImage: `url(${bg})`}} 
     >
       {/* Text */}
       <span style={{ fontFamily: 'Lucida Handwriting, cursive', fontWeight:900 }} className='text-[1.2rem] font-[900]'>SHOP NOW</span>
