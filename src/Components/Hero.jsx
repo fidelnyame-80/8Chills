@@ -37,7 +37,7 @@ const Hero = () => {
   }, [slides.length]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen lg:h-[35rem] overflow-hidden">
       {/* Add your Navbar component here when integrating into your project */}
       <Navbar />
       
@@ -73,7 +73,7 @@ const Hero = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-4xl md:text-5xl lg:text-3xl font-light text-white mb-4 md:mb-6 leading-tight"
+                  className="text-2xl md:text-5xl lg:text-3xl font-light text-white mb-4 md:mb-6 leading-tight"
                   style={{ fontFamily: 'serif' }}
                 >
                   {slides[activeSlide].title}
@@ -104,9 +104,7 @@ const Hero = () => {
                     />
                   </button>
                   
-                  <button className="px-8 py-4 border-2 border-white text-white rounded-lg font-normal text-base hover:bg-white hover:text-black transition-all duration-300 shadow-xl">
-                    View Catalog
-                  </button>
+                  
                 </motion.div>
 
                 {/* Trust Badges */}
@@ -114,7 +112,7 @@ const Hero = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="mt-12 md:mt-16 flex flex-wrap gap-6 md:gap-8"
+                  className="absolute bottom-20 md:mt-16 flex flex-wrap gap-6 md:gap-8"
                 >
                   <div className="flex items-center space-x-2 text-white/90">
                     <Award size={20} />
