@@ -3,6 +3,7 @@ import { Images } from '../assets/Images'
 import { ArrowRight, ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react'
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 
 const Body = () => {
@@ -103,9 +104,11 @@ const Body = () => {
                 </p>
               </div>
 
-              <button className="mt-8 sm:mt-10 px-6 sm:px-8 py-3 border border-white/60 rounded-full text-sm uppercase tracking-wider hover:bg-white/10 transition">
+              <Link
+              to={'/Shop'}
+               className="mt-8 sm:mt-10 px-6 sm:px-8 py-3 border border-white/60 rounded-full text-sm uppercase tracking-wider hover:bg-white/10 transition">
                 Discover the collection
-              </button>
+              </Link>
             </div>
 
             <img
@@ -136,12 +139,14 @@ const Body = () => {
                   </p>
                 </div>
 
-                <button className="mt-8 sm:mt-10 flex items-center gap-3 text-sm uppercase tracking-wider hover:gap-5 transition-all duration-300">
+                <Link
+                to={'/Shop'}
+                 className="mt-8 sm:mt-10 flex items-center gap-3 text-sm uppercase tracking-wider hover:gap-5 transition-all duration-300">
                   Shop now
                   <span className="flex items-center justify-center w-8 h-8 bg-white rounded-full">
                     <ArrowRight className="w-4 h-4 text-black" />
                   </span>
-                </button>
+                </Link>
               </div>
 
               <img

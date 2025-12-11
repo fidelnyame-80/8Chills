@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Award, Clock, Shield } from 'lucide-react';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
+import LiquorShop from '../Pages/Shop';
 
 const Hero = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -97,7 +99,7 @@ const Hero = () => {
                   className="flex flex-col sm:flex-row gap-4"
                 >
                   <button className="group px-8 py-4 bg-white text-black rounded-lg font-normal text-base hover:bg-gray-100 transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl translate-y-15 lg:translate-y-0">
-                    <span>{slides[activeSlide].ctaText}</span>
+                    <Link to={'/Shop'}>{slides[activeSlide].ctaText}</Link>
                     <ChevronRight 
                       size={20} 
                       className="group-hover:translate-x-1 transition-transform duration-300" 
