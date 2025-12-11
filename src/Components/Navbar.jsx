@@ -4,15 +4,19 @@ import Button from './button'
 import { useState } from 'react'
 import { Home, Store, Info } from 'lucide-react'
 import SearchBar from './SearchBar'
+import { Link } from "react-router-dom";
+
+
 
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const menuItems = [
-  { label: "Home", icon: Home },
-  { label: "Shop", icon: Store },
-  { label: "About", icon: Info },
+  { label: "Home", icon: Home, path: "/" },
+  { label: "Shop", icon: Store, path: "/Shop" },
+  { label: "About", icon: Info, path: "/About" },
 ];
+
     return (
         <>
         <div className='relative'>
@@ -39,7 +43,7 @@ const Navbar = () => {
                 <div className='space-y-1.5  lg:hidden pl-35 pt-8 '
                     onClick={() => setOpen(!open)}
                 >
-                    <div className={`bg-white/80 rounded w-10 h-1 ${open ? 'rotate-[45deg]  transform translate-y-3 duration-300 transition-all' : ''}`}></div>
+                    <div className={`bg-white/80  rounded w-10 h-1 ${open ? 'rotate-[45deg]  transform translate-y-3 duration-300 transition-all' : ''}`}></div>
                     <div className={`bg-white/80 rounded w-10 h-1  ${open ? 'opacity-0' : 'opacity-100'}`}></div>
                     <div className={`bg-white/80 rounded w-10 h-1 ${open ? 'rotate-[-45deg]  transform -translate-y-2 duration-300 transition-all ' : ''}`}></div>
 
@@ -56,11 +60,14 @@ const Navbar = () => {
                 <div className=''
                     onClick={() => setOpen(!open)}
                 >
-                     {menuItems.map(({ label, icon: Icon }) => (
-      <p key={label} className="flex items-center gap-3 py-3">
+                     {menuItems.map(({ label, icon: Icon, path }) => (
+      <Link
+       key={label} 
+       to={path}
+       className="flex items-center gap-3 py-3">
         <Icon size={18} className="text-black" />
         {label}
-      </p>
+      </Link>
     ))}
                 </div>
             </div>

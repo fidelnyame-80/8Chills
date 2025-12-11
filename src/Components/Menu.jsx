@@ -1,17 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
-    const menuItems = ['HOME','SHOP','ABOUT']
-    return (
-        <>
-        <div className='flex lg:space-x-20 '>
-{menuItems.map((item) =>(
-    <p key={item} className='text-white/70'>
-        {item}
-    </p>
-))}
-        </div>
-        </>)
-}
+  const menuItems = [
+    { item: 'HOME', path: '/' },
+    { item: 'SHOP', path: '/shop' },
+    { item: 'ABOUT', path: '/about' },
+  ];
 
-export default Menu
+  return (
+    <div className='flex lg:space-x-20'>
+      {menuItems.map(({ item, path }) => (
+        <Link 
+          key={path} 
+          to={path} 
+          className='text-white/70 hover:text-white transition'
+        >
+          {item}
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+export default Menu;

@@ -96,7 +96,7 @@ const Hero = () => {
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="flex flex-col sm:flex-row gap-4"
                 >
-                  <button className="group px-8 py-4 bg-white text-black rounded-lg font-normal text-base hover:bg-gray-100 transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl">
+                  <button className="group px-8 py-4 bg-white text-black rounded-lg font-normal text-base hover:bg-gray-100 transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl translate-y-15 lg:translate-y-0">
                     <span>{slides[activeSlide].ctaText}</span>
                     <ChevronRight 
                       size={20} 
@@ -112,17 +112,17 @@ const Hero = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="absolute bottom-20 md:mt-16 flex flex-wrap gap-6 md:gap-8"
+                  className="absolute bottom-20 md:mt-16 flex flex-wrap gap-6 md:gap-8 "
                 >
-                  <div className="flex items-center space-x-2 text-white/90">
+                  <div className="flex items-center space-x-2 text-white/90 opacity-0 lg:opacity-100">
                     <Award size={20} />
                     <span className="text-sm font-light">Premium Selection</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-white/90">
+                  <div className="flex items-center space-x-2 text-white/90 opacity-0 lg:opacity-100">
                     <Clock size={20} />
                     <span className="text-sm font-light">Fast Delivery</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-white/90">
+                  <div className="flex items-center space-x-2 text-white/90 opacity-0 lg:opacity-100">
                     <Shield size={20} />
                     <span className="text-sm font-light">Secure Shopping</span>
                   </div>

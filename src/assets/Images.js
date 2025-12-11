@@ -13,6 +13,15 @@ import henessy from './Images/henessy.png'
 import blackLabel from './Images/blackLabel.png'
 import claseAzul from './Images/claseAzul.png'
 import donJulio from './Images/donJulio.png'
+import cirocVodka from './Images/cirocVodka.png'
+import blueLabel from './Images/blueLabel.png'
+import donJulio1942 from './Images/donJulio1942.png'
+import courvoisier from './Images/courvoisier.png'
+import reposado from './Images/reposado.png'
+import henessyVSOP from './Images/hennessyVSOP.png'
+import hennessyVS from './Images/hennessyVS.png'
+import donJulioAnejo from './Images/donJulioAnejo.png'
+import claseAzulReposado from './Images/claseAzulReposado.png'
 
 export const Images ={
     logo1,
@@ -29,5 +38,14 @@ export const Images ={
     henessy,
     blackLabel,
     claseAzul,
-    donJulio
+    donJulio,
+    cirocVodka,
+    blueLabel,
+    donJulio1942,
+    courvoisier,
+    reposado,
+    henessyVSOP,
+    hennessyVS,
+    donJulioAnejo,
+    claseAzulReposado
 }
