@@ -22,6 +22,23 @@ import henessyVSOP from './Images/hennessyVSOP.png'
 import hennessyVS from './Images/hennessyVS.png'
 import donJulioAnejo from './Images/donJulioAnejo.png'
 import claseAzulReposado from './Images/claseAzulReposado.png'
+import legendOUD from './Images/legendOUD.png'
+import jackDanielsSingleBarrel from './Images/jackDanielsSingleBarrel.png'
+import andre from './Images/andre.png'
+import baileys from './Images/baileys.png'
+import casamigosBlanco from './Images/casamigosBlanco.png'
+import casamigosAnejo from './Images/casamigosAnejo.png'
+import bumbuRum from './Images/bumbuRum.png'
+import bumbuCream from './Images/bumbuCream.png'
+import bumbuXORum from './Images/bumbuXORum.png'
+import martellBlueSwift from './Images/martellBlueSwift.png'
+import belaireLuxe from './Images/belaireLuxe.png'
+import belaireRose from './Images/belaireRose.png'
+import remyMartinVSOP from './Images/remyMartinVSOP.png'
+import hennessyXO from './Images/hennessyXO.png'
+import jackDaniels1L from './Images/jackDaniels1L.png'
+import chivasRegal from './Images/chivasRegal.png'
+import courvoisierVSOP from './Images/courvoisierVSOP.png'
 
 export const Images ={
     logo1,
@@ -47,5 +64,22 @@ export const Images ={
     henessyVSOP,
     hennessyVS,
     donJulioAnejo,
-    claseAzulReposado
+    claseAzulReposado,
+    legendOUD,
+    jackDanielsSingleBarrel,
+    andre,
+    baileys,
+    casamigosBlanco,
+    casamigosAnejo,
+    bumbuRum,
+    bumbuCream,
+    bumbuXORum,
+    martellBlueSwift,
+    belaireLuxe,
+    belaireRose,
+    remyMartinVSOP,
+    hennessyXO,
+    jackDaniels1L,
+    chivasRegal,
+    courvoisierVSOP
 }

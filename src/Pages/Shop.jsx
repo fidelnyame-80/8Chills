@@ -93,6 +93,132 @@ const LiquorShop = () => {
     },
     {
       id: 8,
+      name: "Jack Daniels Single Barrel",
+      price: 820,
+      category: "Whisky",
+      rating: 4.4,
+      image: [Images.jackDanielsSingleBarrel],
+      description: "Hand-selected single barrel Tennessee whiskey with bold character"
+    },
+    {
+      id: 9,
+      name: "Andre",
+      price: 250,
+      category: "Champagne",
+      rating: 4.4,
+      image: [Images.andre],
+      description: "California sparkling wine perfect for celebrations"
+    },
+    {
+      id: 10,
+      name: "Baileys 1Litre",
+      price: 450,
+      category: "Liqueur",
+      rating: 4.4,
+      image: [Images.baileys],
+      description: "Original Irish cream liqueur with smooth chocolate notes"
+    },
+    {
+      id: 11,
+      name: "Casamigos Blanco",
+      price: 1200,
+      category: "Tequila",
+      rating: 4.4,
+      image: [Images.casamigosBlanco],
+      description: "Crisp and clean tequila with hints of citrus and vanilla"
+    },
+    {
+      id: 12,
+      name: "Casamigos Reposado",
+      price: 1500,
+      category: "Tequila",
+      rating: 4.4,
+      image: [Images.casamigosReposado],
+      description: "Aged 7 months for soft caramel and cocoa flavors"
+    },
+    {
+      id: 13,
+      name: "Casamigos Anejo",
+      price: 1600,
+      category: "Tequila",
+      rating: 4.4,
+      image: [Images.casamigosAnejo],
+      description: "Aged 14 months delivering pure and refined complexity"
+    },
+    {
+      id: 14,
+      name: "Bumbu Rum",
+      price: 600,
+      category: "Rum",
+      rating: 4.4,
+      image: [Images.bumbuRum],
+      description: "Craft Caribbean rum with natural spices and rich flavors"
+    },
+    {
+      id: 15,
+      name: "Bumbu Cream",
+      price: 500,
+      category: "Rum",
+      rating: 4.4,
+      image: [Images.bumbuCream],
+      description: "Smooth rum cream with hints of cinnamon and coconut"
+    },
+    {
+      id: 16,
+      name: "Bumbu XO Rum",
+      price: 800,
+      category: "Rum",
+      rating: 4.4,
+      image: [Images.bumbuXORum],
+      description: "Premium aged rum finished in Spanish oak sherry casks"
+    },
+    {
+      id: 17,
+      name: "Martel Blue Swift 700ml",
+      price: 1200,
+      category: "Cognac",
+      rating: 4.4,
+      image: [Images.martellBlueSwift],
+      description: "Innovative cognac finished in bourbon casks for smooth taste"
+    },
+    {
+      id: 18,
+      name: "Belaire Luxe",
+      price: 600,
+      category: "Champagne",
+      rating: 4.4,
+      image: [Images.belaireLuxe],
+      description: "French sparkling wine with elegant floral and berry notes"
+    },
+    {
+      id: 19,
+      name: "Belaire Rose",
+      price: 800,
+      category: "Champagne",
+      rating: 4.4,
+      image: [Images.belaireRose],
+      description: "Luxurious rose sparkling wine with fresh strawberry flavors"
+    },
+    {
+      id: 20,
+      name: "Remy Martin VSOP 1L",
+      price: 1400,
+      category: "Cognac",
+      rating: 4.4,
+      image: [Images.remyMartinVSOP],
+      description: "Fine champagne cognac aged 4-12 years with vanilla oak notes"
+    },
+    {
+      id: 21,
+      name: "Hennessy XO",
+      price: 3400,
+      category: "Cognac",
+      rating: 4.4,
+      image: [Images.hennessyXO],
+      description: "Extra old cognac with deep complexity and powerful aromas"
+    },
+    {
+      id: 22,
       name: "Johnnie Walker Black Label",
       price: 500,
       category: "Whisky",
@@ -101,7 +227,7 @@ const LiquorShop = () => {
       description: "Iconic blend of over 40 whiskies aged 12 years"
     },
     {
-      id: 9,
+      id: 23,
       name: "Don Julio Anejo",
       price: 1200,
       category: "Tequila",
@@ -110,16 +236,33 @@ const LiquorShop = () => {
       description: "Aged 18 months for rich, complex flavors"
     },
     {
-      id: 10,
+      id: 24,
       name: "Clase Azul Reposado",
       price: 3500,
       category: "Tequila",
       rating: 5.0,
       image: [Images.claseAzulReposado],
       description: "Ultra-premium tequila in handcrafted decanter"
+    },
+    {
+      id: 25,
+      name: "Chivas Regal",
+      price: 700,
+      category: "Whisky",
+      rating: 4.5,
+      image: [Images.chivasRegal],
+      description: "Smooth blended Scotch whisky with honey and fruit notes"
+    },
+    {
+      id: 26,
+      name: "Courvoisier VSOP",
+      price: 900,
+      category: "Cognac",
+      rating: 4.6,
+      image: [Images.courvoisierVSOP],
+      description: "Rich and complex cognac with hints of peach and toasted almonds"
     }
-  ];
-
+]
   let filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     let matchesPrice = true;
