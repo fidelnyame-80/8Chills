@@ -31,7 +31,7 @@ const LiquorShop = () => {
     {
       id: 1,
       name: "Ciroc Vodka",
-      price: 500,
+      price: 700,
       category: "Vodka",
       rating: 4.5,
       image: [Images.cirocVodka],
