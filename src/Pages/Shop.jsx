@@ -317,34 +317,34 @@ const LiquorShop = () => {
 
   if (currentView === 'detail' && selectedProduct) {
     return (
-      <div className="w-full bg-white min-h-screen py-8 md:py-12">
+      <div className="w-full bg-zinc-950 text-zinc-100 min-h-screen py-8 md:py-12">
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
-          <button onClick={handleBack} className="flex items-center space-x-2 text-stone-600 hover:text-stone-900 mb-6 transition">
+          <button onClick={handleBack} className="flex items-center space-x-2 text-zinc-400 hover:text-zinc-100 mb-6 transition">
             <ArrowLeft size={20} />
             <span className="text-sm">Back to Shop</span>
           </button>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-stone-50 rounded-2xl p-8">
+            <div className="bg-zinc-900 rounded-2xl p-8">
               <img src={selectedProduct.image[0]} alt={selectedProduct.name} className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
-              <p className="text-xs text-stone-500 uppercase mb-2">{selectedProduct.category}</p>
-              <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">{selectedProduct.name}</h1>
-              <p className="text-3xl font-bold text-stone-900 mb-6">GHC {selectedProduct.price.toLocaleString()}</p>
-              <p className="text-base text-stone-600 mb-8">{selectedProduct.description}</p>
+              <p className="text-xs text-zinc-500 uppercase mb-2">{selectedProduct.category}</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-4">{selectedProduct.name}</h1>
+              <p className="text-3xl font-bold text-zinc-100 mb-6">GHC {selectedProduct.price.toLocaleString()}</p>
+              <p className="text-base text-zinc-400 mb-8">{selectedProduct.description}</p>
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-3">Quantity</label>
                 <div className="flex items-center space-x-4">
-                  <button onClick={() => setQuantity(q => q > 1 ? q - 1 : 1)} className="w-12 h-12 bg-stone-100 rounded-lg">-</button>
+                  <button onClick={() => setQuantity(q => q > 1 ? q - 1 : 1)} className="w-12 h-12 bg-zinc-800 rounded-lg">-</button>
                   <span className="text-xl font-medium w-16 text-center">{quantity}</span>
-                  <button onClick={() => setQuantity(q => q + 1)} className="w-12 h-12 bg-stone-100 rounded-lg">+</button>
+                  <button onClick={() => setQuantity(q => q + 1)} className="w-12 h-12 bg-zinc-800 rounded-lg">+</button>
                 </div>
               </div>
-              <div className="flex justify-between items-center mb-6 p-4 bg-stone-50 rounded-lg">
+              <div className="flex justify-between items-center mb-6 p-4 bg-zinc-900 rounded-lg">
                 <span className="text-lg font-medium">Total</span>
                 <span className="text-2xl font-bold">GHC {(selectedProduct.price * quantity).toLocaleString()}</span>
               </div>
-              <button onClick={handleCheckout} className="w-full py-4 bg-stone-800 text-white rounded-lg hover:bg-stone-700">
+              <button onClick={handleCheckout} className="w-full py-4 bg-zinc-100 text-black rounded-lg hover:bg-zinc-300">
                 Proceed to Checkout
               </button>
             </div>
@@ -357,14 +357,14 @@ const LiquorShop = () => {
   if (currentView === 'checkout' && selectedProduct) {
     if (orderComplete) {
       return (
-        <div className="w-full bg-white min-h-screen py-12">
+        <div className="w-full bg-zinc-950 text-zinc-100 min-h-screen py-12">
           <div className="max-w-2xl mx-auto px-4 text-center">
             <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <Check size={40} className="text-white" />
             </div>
             <h2 className="text-3xl font-bold mb-4">Order Confirmed!</h2>
-            <p className="text-stone-600 mb-8">Thank you for your purchase</p>
-            <button onClick={handleBackToShop} className="px-8 py-3 bg-stone-800 text-white rounded-lg">Continue Shopping</button>
+            <p className="text-zinc-400 mb-8">Thank you for your purchase</p>
+            <button onClick={handleBackToShop} className="px-8 py-3 bg-zinc-100 text-black rounded-lg">Continue Shopping</button>
           </div>
         </div>
       );
@@ -375,9 +375,9 @@ const LiquorShop = () => {
     const grandTotal = total + deliveryFee;
 
     return (
-      <div className="w-full bg-white min-h-screen py-8">
+      <div className="w-full bg-zinc-950 text-zinc-100 min-h-screen py-8">
         <div className="max-w-6xl mx-auto px-4 lg:px-8">
-          <button onClick={handleBack} className="flex items-center space-x-2 text-stone-600 mb-6">
+          <button onClick={handleBack} className="flex items-center space-x-2 text-zinc-400 mb-6">
             <ArrowLeft size={20} />
             <span>Back</span>
           </button>
@@ -385,67 +385,67 @@ const LiquorShop = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="bg-stone-50 rounded-lg p-6">
+                <div className="bg-zinc-900 rounded-lg p-6">
                   <h3 className="text-lg font-medium mb-4">Contact Information</h3>
                   <div className="space-y-4">
-                    <input type="text" name="fullName" placeholder="Full Name" required value={formData.fullName} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
-                    <input type="email" name="email" placeholder="Email" required value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
-                    <input type="tel" name="phone" placeholder="Phone" required value={formData.phone} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
+                    <input type="text" name="fullName" placeholder="Full Name" required value={formData.fullName} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
+                    <input type="email" name="email" placeholder="Email" required value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
+                    <input type="tel" name="phone" placeholder="Phone" required value={formData.phone} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
                   </div>
                 </div>
-                <div className="bg-stone-50 rounded-lg p-6">
+                <div className="bg-zinc-900 rounded-lg p-6">
                   <h3 className="text-lg font-medium mb-4">Delivery Address</h3>
                   <div className="space-y-4">
-                    <input type="text" name="address" placeholder="Address" required value={formData.address} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
-                    <input type="text" name="city" placeholder="City" required value={formData.city} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
+                    <input type="text" name="address" placeholder="Address" required value={formData.address} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
+                    <input type="text" name="city" placeholder="City" required value={formData.city} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
                   </div>
                 </div>
-                <div className="bg-stone-50 rounded-lg p-6">
+                <div className="bg-zinc-900 rounded-lg p-6">
                   <h3 className="text-lg font-medium mb-4">Payment Method</h3>
                   <div className="grid grid-cols-2 gap-4 mb-6">
-                    <button type="button" onClick={() => setPaymentMethod('momo')} className={`p-4 border-2 rounded-lg ${paymentMethod === 'momo' ? 'border-stone-800' : 'border-stone-300'}`}>
+                    <button type="button" onClick={() => setPaymentMethod('momo')} className={`p-4 border-2 rounded-lg ${paymentMethod === 'momo' ? 'border-amber-400' : 'border-zinc-700'}`}>
                       <Smartphone className="mx-auto mb-2" size={24} />
                       <p className="text-sm">Mobile Money</p>
                     </button>
-                    <button type="button" onClick={() => setPaymentMethod('card')} className={`p-4 border-2 rounded-lg ${paymentMethod === 'card' ? 'border-stone-800' : 'border-stone-300'}`}>
+                    <button type="button" onClick={() => setPaymentMethod('card')} className={`p-4 border-2 rounded-lg ${paymentMethod === 'card' ? 'border-amber-400' : 'border-zinc-700'}`}>
                       <CreditCard className="mx-auto mb-2" size={24} />
                       <p className="text-sm">Card Payment</p>
                     </button>
                   </div>
                   {paymentMethod === 'momo' && (
                     <div className="space-y-4">
-                      <select name="momoNetwork" required value={formData.momoNetwork} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg">
+                      <select name="momoNetwork" required value={formData.momoNetwork} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg">
                         <option value="">Select Network</option>
                         <option value="mtn">MTN Mobile Money</option>
                         <option value="vodafone">Vodafone Cash</option>
                       </select>
-                      <input type="tel" name="momoNumber" placeholder="Mobile Money Number" required value={formData.momoNumber} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
+                      <input type="tel" name="momoNumber" placeholder="Mobile Money Number" required value={formData.momoNumber} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
                     </div>
                   )}
                   {paymentMethod === 'card' && (
                     <div className="space-y-4">
-                      <input type="text" name="cardNumber" placeholder="Card Number" required value={formData.cardNumber} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
+                      <input type="text" name="cardNumber" placeholder="Card Number" required value={formData.cardNumber} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
                       <div className="grid grid-cols-2 gap-4">
-                        <input type="text" name="cardExpiry" placeholder="MM/YY" required value={formData.cardExpiry} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
-                        <input type="text" name="cardCVV" placeholder="CVV" required value={formData.cardCVV} onChange={handleInputChange} className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg" />
+                        <input type="text" name="cardExpiry" placeholder="MM/YY" required value={formData.cardExpiry} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
+                        <input type="text" name="cardCVV" placeholder="CVV" required value={formData.cardCVV} onChange={handleInputChange} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
                       </div>
                     </div>
                   )}
                 </div>
-                <button type="submit" disabled={!paymentMethod} className="w-full py-4 bg-stone-800 text-white rounded-lg disabled:bg-stone-300">Complete Order</button>
+                <button type="submit" disabled={!paymentMethod} className="w-full py-4 bg-zinc-100 text-black rounded-lg disabled:bg-zinc-700 disabled:text-zinc-400">Complete Order</button>
               </form>
             </div>
             <div className="lg:col-span-1">
-              <div className="bg-stone-50 rounded-lg p-6">
+              <div className="bg-zinc-900 rounded-lg p-6">
                 <h3 className="text-lg font-medium mb-4">Order Summary</h3>
                 <div className="space-y-4 mb-6 pb-6 border-b">
                   <div className="flex items-start space-x-4">
-                    <div className="w-20 h-20 bg-white rounded-lg p-2">
+                    <div className="w-20 h-20 bg-zinc-950 rounded-lg p-2">
                      <img src={selectedProduct.image[0]} alt={selectedProduct.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex-1">
                       <p className="text-sm font-medium">{selectedProduct.name}</p>
-                      <p className="text-xs text-stone-600">Qty: {quantity}</p>
+                      <p className="text-xs text-zinc-400">Qty: {quantity}</p>
                     </div>
                     <p className="text-sm font-medium">GHC {total.toLocaleString()}</p>
                   </div>
@@ -476,53 +476,53 @@ const LiquorShop = () => {
     <>
     <div className='mt-5 ml-5'><BackToHomeButton /></div>
     
-    <div className="w-full bg-white min-h-screen py-12">
+    <div className="w-full bg-zinc-950 text-zinc-100 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 ">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-stone-800 mb-4">PREMIUM LIQUOR COLLECTION</h1>
-          <p className="text-base text-stone-600">Discover Accra's finest selection</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-zinc-100 mb-4">PREMIUM LIQUOR COLLECTION</h1>
+          <p className="text-base text-zinc-400">Discover Accra's finest selection</p>
         </div>
         <div className="mb-12">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400" size={20} />
-              <input type="text" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-stone-50 border border-stone-300 rounded-lg" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} />
+              <input type="text" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-zinc-900 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 rounded-lg" />
             </div>
-            <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)} className="px-4 py-3 bg-stone-50 border border-stone-300 rounded-lg">
+            <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)} className="px-4 py-3 bg-zinc-900 border border-zinc-700 text-zinc-100 rounded-lg">
               <option value="all">All Prices</option>
               <option value="under1000">Under GHC 1000</option>
               <option value="1000to2000">GHC 1000 - 2000</option>
               <option value="2000to3000">GHC 2000 - 3000</option>
               <option value="over3000">Over GHC 3000</option>
             </select>
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="px-4 py-3 bg-stone-50 border border-stone-300 rounded-lg">
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="px-4 py-3 bg-zinc-900 border border-zinc-700 text-zinc-100 rounded-lg">
               <option value="featured">Featured</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
               <option value="name">Name: A to Z</option>
             </select>
           </div>
-          <p className="text-sm text-stone-600 mt-4">Showing {filteredProducts.length} of {products.length} products</p>
+          <p className="text-sm text-zinc-400 mt-4">Showing {filteredProducts.length} of {products.length} products</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
             <div key={product.id} className="cursor-pointer" onClick={() => handleProductClick(product)}>
-              <div className="bg-stone-50 rounded-lg overflow-hidden hover:shadow-2xl transition">
-                <div className="aspect-[3/4] bg-white p-6">
+              <div className="bg-zinc-900 rounded-lg overflow-hidden hover:shadow-2xl transition">
+                <div className="aspect-[3/4] bg-zinc-950 p-6">
                   <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-1 mb-2">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} className={i < Math.floor(product.rating) ? 'fill-amber-400 text-amber-400' : 'text-stone-300'} />
+                      <Star key={i} size={14} className={i < Math.floor(product.rating) ? 'fill-amber-400 text-amber-400' : 'text-zinc-700'} />
                     ))}
                   </div>
-                  <p className="text-xs text-stone-500 uppercase mb-1">{product.category}</p>
-                  <h3 className="text-base font-medium text-stone-800 mb-2">{product.name}</h3>
-                  <p className="text-sm text-stone-600 mb-4">{product.description}</p>
+                  <p className="text-xs text-zinc-500 uppercase mb-1">{product.category}</p>
+                  <h3 className="text-base font-medium text-zinc-100 mb-2">{product.name}</h3>
+                  <p className="text-sm text-zinc-400 mb-4">{product.description}</p>
                   <div className="flex items-center justify-between">
                     <p className="text-2xl font-bold">GHC {product.price.toLocaleString()}</p>
-                    <button className="p-3 bg-stone-800 text-white rounded-full">
+                    <button className="p-3 bg-zinc-100 text-black rounded-full">
                       <ShoppingCart size={18} />
                     </button>
                   </div>
@@ -539,3 +539,4 @@ const LiquorShop = () => {
 };
 
 export default LiquorShop;
+

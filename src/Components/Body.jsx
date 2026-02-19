@@ -1,325 +1,338 @@
-import React from 'react'
-import { Images } from '../assets/Images'
-import { ArrowRight, ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react'
-import { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Images } from "../assets/Images";
+import { ArrowRight, ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const scrollContainerRef = useRef(null);
-  
+  const [activeProductIndex, setActiveProductIndex] = useState(0);
+
   const scroll = (direction) => {
     const container = scrollContainerRef.current;
     if (container) {
-      const scrollAmount = direction === 'left' ? -300 : 300;
-      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const cards = container.querySelectorAll("[data-product-card]");
+      const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 300;
+      const scrollAmount = direction === "left" ? -step : step;
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
+  };
+
+  const scrollToProduct = (index) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const cards = container.querySelectorAll("[data-product-card]");
+    if (!cards.length) return;
+
+    const clampedIndex = Math.max(0, Math.min(index, cards.length - 1));
+    container.scrollTo({ left: cards[clampedIndex].offsetLeft, behavior: "smooth" });
+    setActiveProductIndex(clampedIndex);
   };
 
   const products = [
     {
-      name: "JOHNNIE WALKER BLACK LABEL",
-      price: "$42.00",
-      image: Images.blackLabel,   // ← change path
+      name: "Johnnie Walker Black Label",
+      price: "GHC 450",
+      image: Images.blackLabel,
     },
     {
-      name: "CLASE AZUL REPOSADO",
-      price: "$169.00",
+      name: "Clase Azul Reposado",
+      price: "GHC 1200",
       image: Images.claseAzul,
     },
     {
-      name: "HENNESSY XO",
-      price: "$219.00",
+      name: "Hennessy XO",
+      price: "GHC 2800",
       image: Images.henessy,
     },
     {
-      name: "DON JULIO 1942",
-      price: "$189.00",
+      name: "Don Julio 1942",
+      price: "GHC 1800",
       image: Images.donJulio,
     },
   ];
- return (
-  <>
-    <div className='w-[] h-full relative'>
 
-      <div className='mt-10'>
-        <div className=''>
-          <motion.h2
-            className='mx-2 uppercase text-[1.5rem] font-[700] text-stone-700 mb-5 ml-43'
-            initial={{ opacity: 0, y: 50 }}
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const updateActiveIndex = () => {
+      if (window.innerWidth >= 768) return;
+
+      const cards = container.querySelectorAll("[data-product-card]");
+      if (!cards.length) return;
+
+      const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : cards[0].offsetWidth;
+      const nextIndex = Math.round(container.scrollLeft / Math.max(step, 1));
+      const clampedIndex = Math.max(0, Math.min(nextIndex, cards.length - 1));
+
+      setActiveProductIndex(clampedIndex);
+    };
+
+    updateActiveIndex();
+    container.addEventListener("scroll", updateActiveIndex, { passive: true });
+    window.addEventListener("resize", updateActiveIndex);
+
+    return () => {
+      container.removeEventListener("scroll", updateActiveIndex);
+      window.removeEventListener("resize", updateActiveIndex);
+    };
+  }, []);
+
+  return (
+    <>
+      <div className="relative w-full overflow-hidden bg-zinc-950">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/55 via-zinc-950/88 to-zinc-950" />
+
+        <div className="relative mx-auto w-full max-w-5xl px-4 pb-8 pt-16 sm:pt-20 md:pt-20 lg:px-8 lg:pt-14">
+          <motion.div
+            className="relative overflow-hidden px-1 py-6 sm:px-2 sm:py-8 lg:px-2 lg:py-8"
+            initial={{ opacity: 0, y: 36 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.8 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.25 }}
           >
-            The best Liquor deals in Accra
-            <hr className='w-45' />
-          </motion.h2>
-        </div>
-
-        <div>
-          <motion.p
-            className='text-stone-700 mx-15'
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.8 }}
-          >
-            Discover Accra's most trusted source for premium liquor. From top-shelf classics to rare finds, we deliver quality, authenticity, and unbeatable value every single time.
-          </motion.p>
-        </div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        viewport={{ once: false, amount: 0.8 }}
-      >
-        <div className='text-stone-800 place-self-center mt-10 text-2xl font-[600]'>
-          DISCOVER
-        </div>
-      </motion.div>
-
-      <div className="w-full max-w-7xl mx-auto px-4 py-12 lg:scale-90">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-
-          {/* LEFT CARD – HENNESSY */}
-          <motion.div 
-            className="relative w-full overflow-hidden bg-gradient-to-br from-amber-950 via-amber-900 to-black text-white shadow-2xl aspect-[4/5] md:aspect-auto h-[30rem]"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.1 }}
-          >
-            <div className="absolute inset-0 bg-black/30"></div>
-
-            <div className="relative p-6 p-8 flex flex-col justify-between h-full">
-              <div>
-                <h2 className="mt-3 lg:mt-1 sm:mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-                  LIVE YOUR MOMENT
-                </h2>
-                <p className="mt-6 sm:mt-6 text-md sm:text-base opacity-90 leading-relaxed w-25 lg:w-40 lg:text-xl">
-                  An exclusive discovery for every unique occasion
-                </p>
-              </div>
-
-              <Link
-              to={'/Shop'}
-               className="mt-8 sm:mt-10 px-6 sm:px-8 py-3 border border-white/60 rounded-full text-sm uppercase tracking-wider hover:bg-white/10 transition">
-                Discover the collection
-              </Link>
+            <div className="pointer-events-none absolute inset-0 lg:hidden">
+              <img
+                src={Images.bodyImg}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 m-auto h-[125%] w-[125%] object-contain opacity-[0.42] blur-[0.9px] saturate-[1.22] contrast-[1.08]"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_34%,rgba(251,191,36,0.22),rgba(0,0,0,0)_48%)]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/34 via-zinc-950/58 to-zinc-950/80" />
             </div>
 
-            <img
-              src={Images.henessy}
-              alt="Hennessy bottle"
-              className="absolute bottom-30 right-2 w-44 h-50 lg:w-60 lg:h-60 -translate-x-1 lg:mr-5 drop-shadow-2xl object-contain pointer-events-none object-cover mr-1 lg:mb-2"
-            />
+            <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[56%] lg:block">
+              <img
+                src={Images.bodyImg}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-y-0 left-0 my-auto h-[92%] w-full object-contain object-left opacity-[0.35] blur-[0.6px] saturate-[1.22] contrast-[1.1]"
+              />
+              <div className="absolute inset-y-0 left-0 w-full bg-[radial-gradient(circle_at_30%_50%,rgba(251,191,36,0.2),rgba(0,0,0,0)_60%)]" />
+              <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-black/20 via-zinc-950/40 to-transparent" />
+            </div>
+
+            <div className="relative grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8">
+              <motion.div
+                className="relative z-10"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.68, ease: "easeOut", delay: 0.06 }}
+                viewport={{ once: false, amount: 0.35 }}
+              >
+                <div className="pointer-events-none absolute -left-10 top-10 h-52 w-52 rounded-full bg-amber-300/10 blur-3xl" />
+                <p className="mb-3 text-[0.68rem] uppercase tracking-[0.24em] text-amber-300/78">Editorial Selection</p>
+                <h2 className="text-3xl font-medium leading-tight tracking-[0.01em] text-zinc-100 sm:text-4xl lg:text-[1.9rem] xl:text-[2.05rem] drop-shadow-[0_0_30px_rgba(0,0,0,0.72)]">
+                  Curated bottles for evenings with quiet confidence.
+                </h2>
+                <div className="mt-6 h-px w-20 bg-amber-300/55" />
+              </motion.div>
+
+              <motion.div
+                className="relative z-10 max-w-xl lg:justify-self-end"
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.68, ease: "easeOut", delay: 0.16 }}
+                viewport={{ once: false, amount: 0.35 }}
+              >
+                <p className="text-base leading-relaxed text-zinc-300/95 lg:text-[0.84rem] lg:leading-6 drop-shadow-[0_0_22px_rgba(0,0,0,0.62)]">
+                  From iconic labels to rare discoveries, each pour is selected for craft, character, and a finish worth lingering over.
+                </p>
+                <Link to="/Shop" className="btn-arcade btn-arcade-secondary mt-5 w-fit border-amber-300/45">
+                  Discover Selection
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
+        </div>
 
-          {/* RIGHT CARD – JOHNNIE WALKER BLACK LABEL */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.1 }}
-          >
-            <div className="relative w-full overflow-hidden bg-gradient-to-tr from-black via-slate-900 to-neutral-800 text-white shadow-2xl aspect-[4/5] md:aspect-auto h-[30rem]">
-              <div className="absolute inset-0 bg-black/40"></div>
+        <div className="w-full max-w-5xl mx-auto px-4 pb-12 pt-2 lg:px-8 lg:pt-12 lg:pb-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8">
+            <motion.div
+              className="relative w-full overflow-hidden bg-gradient-to-br from-amber-950 via-amber-900 to-black text-white shadow-2xl aspect-[4/5] md:aspect-auto h-[30rem] lg:h-[22.4rem]"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: false, amount: 0.1 }}
+            >
+              <div className="absolute inset-0 bg-black/30"></div>
 
-              <div className="relative p-6 sm:p-8 flex flex-col justify-between h-full">
+              <div className="relative p-8 flex h-full flex-col justify-between lg:pr-36">
                 <div>
-                  <p className="text-xs sm:text-sm uppercase tracking-widest text-amber-400 font-medium">Staff Pick</p>
-                  <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-                    BLACK<br />LABEL
-                  </h2>
-                  <p className="mt-6 sm:mt-6 text-md sm:text-base opacity-90 leading-relaxed w-23 lg:w-40">
-                    The iconic blend of over 40 whiskies, aged 12 years. Rich, smoky, unforgettable.
+                  <h2 className="mt-3 lg:mt-1 sm:mt-4 text-3xl sm:text-4xl lg:text-[2.3rem] font-bold leading-tight">LIVE YOUR MOMENT</h2>
+                  <p className="mt-6 sm:mt-6 text-md sm:text-base opacity-90 leading-relaxed w-25 lg:w-40 lg:text-[0.88rem]">
+                    An exclusive discovery for every unique occasion
                   </p>
                 </div>
 
                 <Link
-                to={'/Shop'}
-                 className="mt-8 sm:mt-10 flex items-center gap-3 text-sm uppercase tracking-wider hover:gap-5 transition-all duration-300">
-                  Shop now
-                  <span className="flex items-center justify-center w-8 h-8 bg-white rounded-full">
-                    <ArrowRight className="w-4 h-4 text-black" />
-                  </span>
+                  to="/Shop"
+                  className="btn-arcade btn-arcade-secondary mt-8 sm:mt-10 w-fit whitespace-nowrap"
+                >
+                  Discover the collection
                 </Link>
               </div>
 
               <img
-                src={Images.blackLabel}
-                alt="Johnnie Walker Black Label"
-                className="absolute bottom-30 right-2 w-44 h-50 lg:w-60 -translate-x-1 drop-shadow-2xl object-contain pointer-events-none object-cover mr-1"
+                src={Images.henessy}
+                alt="Hennessy bottle"
+                className="absolute bottom-30 right-2 h-50 w-44 object-contain pointer-events-none drop-shadow-2xl -translate-x-1 lg:bottom-3 lg:right-4 lg:h-36 lg:w-36"
               />
-            </div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: false, amount: 0.1 }}
+            >
+              <div className="relative w-full overflow-hidden bg-gradient-to-tr from-black via-slate-900 to-neutral-800 text-white shadow-2xl aspect-[4/5] md:aspect-auto h-[30rem] lg:h-[22.4rem]">
+                <div className="absolute inset-0 bg-black/40"></div>
+
+                <div className="relative p-6 sm:p-8 flex flex-col justify-between h-full">
+                  <div>
+                    <p className="text-xs sm:text-sm uppercase tracking-widest text-amber-400 font-medium">Staff Pick</p>
+                    <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl lg:text-[2.3rem] font-bold leading-tight">
+                      BLACK
+                      <br />
+                      LABEL
+                    </h2>
+                    <p className="mt-6 sm:mt-6 text-md sm:text-base opacity-90 leading-relaxed w-23 lg:w-40 lg:text-[0.88rem]">
+                      The iconic blend of over 40 whiskies, aged 12 years. Rich, smoky, unforgettable.
+                    </p>
+                  </div>
+
+                  <Link
+                    to="/Shop"
+                    className="btn-arcade mt-8 sm:mt-10 w-fit"
+                  >
+                    Shop now
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full border border-amber-200/35 bg-black/35">
+                      <ArrowRight className="h-4 w-4 text-amber-100" />
+                    </span>
+                  </Link>
+                </div>
+
+                <img
+                  src={Images.blackLabel}
+                  alt="Johnnie Walker Black Label"
+                  className="absolute bottom-30 right-2 h-50 w-44 object-contain pointer-events-none drop-shadow-2xl -translate-x-1 lg:bottom-3 lg:right-4 lg:w-44"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
 
-      <div className="w-full overflow-hidden bg-gray-50 py-12">
-        <div className="max-w-7xl lg:max-w-2xl mx-auto px-4 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.1 }}
-            className="text-2xl sm:text-3xl font-light tracking-widest text-gray-800 mb-10 text-center sm:text-left"
-          >
-            FEATURED PRODUCTS
-          </motion.h2>
-
-          <div className="w-full bg-white py-12 md:py-16 lg:py-20">
-            <div className="max-w-7xl mx-auto px-4 lg:px-8">
-
-              {/* Section Title */}
+        <div className="w-full overflow-hidden bg-gradient-to-b from-zinc-950 via-zinc-900 to-black py-10 md:py-14 lg:py-10">
+          <div className="max-w-5xl lg:max-w-[52rem] mx-auto px-4 lg:px-8">
+            <div className="mb-5 sm:mb-6">
+              <p className="text-[0.68rem] uppercase font-medium tracking-[0.18em] text-amber-300/85 mb-2">Curated Selection</p>
+              <div className="h-px w-20 bg-amber-300/45 mb-3"></div>
               <motion.h2
-                className="text-3xl md:text-4xl lg:text-5xl font-light text-center mb-12 md:mb-16"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 viewport={{ once: false, amount: 0.1 }}
+                className="text-2xl sm:text-[2rem] lg:text-[1.58rem] font-medium tracking-[0.08em] text-zinc-100"
               >
-                Popular Liquor
+                FEATURED PRODUCTS
               </motion.h2>
+              <p className="mt-1 text-sm sm:text-base text-zinc-400">Popular Liquor</p>
+            </div>
 
-              {/* Carousel Container */}
+            <div className="rounded-[2.1rem] border border-zinc-700/80 bg-zinc-900/88 p-5 sm:p-7 md:px-8 md:pt-8 md:pb-11 lg:p-5 lg:pt-6 lg:pb-8 shadow-[0_26px_44px_-30px_rgba(0,0,0,0.85)]">
               <div className="relative">
-                {/* Left Button */}
                 <button
                   onClick={() => scroll("left")}
-                  className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-10 w-10 h-10 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-50 transition"
+                  className="btn-arcade-icon btn-arcade-icon-sm hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-20"
                   aria-label="Previous products"
                 >
-                  <ChevronLeft size={20} />
+                  <ChevronLeft size={16} />
                 </button>
 
-                {/* Right Button */}
                 <button
                   onClick={() => scroll("right")}
-                  className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-10 w-10 h-10 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-50 transition"
+                  className="btn-arcade-icon btn-arcade-icon-sm hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-20"
                   aria-label="Next products"
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={16} />
                 </button>
 
-                {/* Products */}
                 <div
                   ref={scrollContainerRef}
-                  className="overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
+                  className="overflow-x-auto scroll-smooth snap-x snap-mandatory pt-1 pb-4"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                  <div className="flex gap-6 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6">
+                  <div className="flex gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-4">
+                    {products.map((product) => (
+                      <div key={product.name} data-product-card className="shrink-0 w-[84%] sm:w-[68%] md:w-auto snap-center">
+                        <article className="flex h-full min-h-[24.25rem] md:min-h-[25rem] lg:min-h-[20.2rem] flex-col rounded-[1.35rem] border border-zinc-800 bg-zinc-950 px-5 pt-5 pb-4 lg:px-4 lg:pt-4 lg:pb-3 shadow-[0_14px_24px_-20px_rgba(0,0,0,0.7)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_28px_-18px_rgba(0,0,0,0.74)]">
+                          <div className="mb-5 flex h-56 items-center justify-center sm:h-60 lg:h-34">
+                            <img src={product.image} alt={product.name} className="h-full w-full object-contain px-2" />
+                          </div>
 
-                    {/* Product 1 - Black Label */}
-                    <div className="shrink-0 w-[85%] sm:w-[70%] md:w-auto snap-center">
-                      <div className="bg-gray-50 rounded-lg p-6 group hover:shadow-xl transition-shadow duration-300">
-                        <div className="aspect-3/4 bg-white rounded-lg mb-4 overflow-hidden flex items-center justify-center">
-                          <img
-                            src={Images.blackLabel}
-                            alt="Johnnie Walker Black Label"
-                            className="w-full h-full object-contain p-4"
-                          />
-                        </div>
-                        <h3 className="text-sm md:text-base font-light text-gray-800 mb-2 text-center">
-                          Johnnie Walker Black Label
-                        </h3>
-                        <div className="flex items-center justify-between">
-                          <p className="text-lg font-normal text-gray-900">GHC 450</p>
-                          <button className="p-2 bg-black text-white rounded-full hover:bg-gray-800 transition">
-                            <ShoppingCart size={16} />
-                          </button>
-                        </div>
+                          <h3 className="min-h-[3rem] text-sm md:text-base font-medium text-zinc-200 leading-snug">{product.name}</h3>
+
+                          <div className="mt-4 flex items-end justify-between gap-3 border-t border-zinc-800 pt-4">
+                            <p className="text-[1.45rem] leading-none font-semibold tracking-tight text-zinc-50 lg:text-[1.2rem]">{product.price}</p>
+                            <button
+                              className="btn-arcade-icon btn-arcade-icon-sm inline-flex shrink-0"
+                              aria-label={`Add ${product.name} to cart`}
+                            >
+                              <ShoppingCart size={16} />
+                            </button>
+                          </div>
+                        </article>
                       </div>
-                    </div>
-
-                    {/* Product 2 - Clase Azul */}
-                    <div className="shrink-0 w-[85%] sm:w-[70%] md:w-auto snap-center">
-                      <div className="bg-gray-50 rounded-lg p-6 group hover:shadow-xl transition-shadow duration-300">
-                        <div className="aspect-3/4 bg-white rounded-lg mb-4 overflow-hidden flex items-center justify-center">
-                          <img
-                            src={Images.claseAzul}
-                            alt="Clase Azul Reposado"
-                            className="w-full h-full object-contain p-4"
-                          />
-                        </div>
-                        <h3 className="text-sm md:text-base font-light text-gray-800 mb-2 text-center">
-                          Clase Azul Reposado
-                        </h3>
-                        <div className="flex items-center justify-between">
-                          <p className="text-lg font-normal text-gray-900">GHC 1200</p>
-                          <button className="p-2 bg-black text-white rounded-full hover:bg-gray-800 transition">
-                            <ShoppingCart size={16} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Product 3 - Hennessy XO */}
-                    <div className="shrink-0 w-[85%] sm:w-[70%] md:w-auto snap-center">
-                      <div className="bg-gray-50 rounded-lg p-6 group hover:shadow-xl transition-shadow duration-300">
-                        <div className="aspect-3/4 bg-white rounded-lg mb-4 overflow-hidden flex items-center justify-center">
-                          <img
-                            src={Images.henessy}
-                            alt="Hennessy XO"
-                            className="w-full h-full object-contain p-4"
-                          />
-                        </div>
-                        <h3 className="text-sm md:text-base font-light text-gray-800 mb-2 text-center">
-                          Hennessy XO
-                        </h3>
-                        <div className="flex items-center justify-between">
-                          <p className="text-lg font-normal text-gray-900">GHC 2800</p>
-                          <button className="p-2 bg-black text-white rounded-full hover:bg-gray-800 transition">
-                            <ShoppingCart size={16} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Product 4 - Don Julio */}
-                    <div className="shrink-0 w-[85%] sm:w-[70%] md:w-auto snap-center">
-                      <div className="bg-gray-50 rounded-lg p-6 group hover:shadow-xl transition-shadow duration-300">
-                        <div className="aspect-3/4 bg-white rounded-lg mb-4 overflow-hidden flex items-center justify-center">
-                          <img
-                            src={Images.donJulio}
-                            alt="Don Julio 1942"
-                            className="w-full h-full object-contain p-4"
-                          />
-                        </div>
-                        <h3 className="text-sm md:text-base font-light text-gray-800 mb-2 text-center">
-                          Don Julio 1942
-                        </h3>
-                        <div className="flex items-center justify-between">
-                          <p className="text-lg font-normal text-gray-900">GHC 1800</p>
-                          <button className="p-2 bg-black text-white rounded-full hover:bg-gray-800 transition">
-                            <ShoppingCart size={16} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Mobile Dots */}
-              <div className="flex md:hidden justify-center gap-2 mt-6">
-                <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+              <div className="flex md:hidden items-center justify-center gap-3 mt-6">
+                <button
+                  onClick={() => scroll("left")}
+                  disabled={activeProductIndex === 0}
+                  className="btn-arcade-icon h-8 w-8 disabled:opacity-45 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  aria-label="Previous product"
+                >
+                  <ChevronLeft size={14} />
+                </button>
+
+                <div className="flex items-center gap-2">
+                  {products.map((product, index) => (
+                    <button
+                      key={product.name}
+                      onClick={() => scrollToProduct(index)}
+                      className={`rounded-full transition-all duration-300 ${
+                        activeProductIndex === index
+                          ? "h-2.5 w-8 bg-amber-200 shadow-[0_0_14px_-5px_rgba(251,191,36,0.9)]"
+                          : "h-2.5 w-2.5 bg-zinc-600 hover:bg-zinc-400"
+                      }`}
+                      aria-label={`Go to product ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => scroll("right")}
+                  disabled={activeProductIndex === products.length - 1}
+                  className="btn-arcade-icon h-8 w-8 disabled:opacity-45 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  aria-label="Next product"
+                >
+                  <ChevronRight size={14} />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </>
+  );
+};
 
-    </div>
-  </>
-)
-}
+export default Body;
 
-        export default Body;

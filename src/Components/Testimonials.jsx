@@ -26,14 +26,14 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-stone-50 to-white">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="py-20 px-6 bg-gradient-to-b from-zinc-950 via-zinc-900 to-black lg:py-12">
+      <div className="max-w-6xl lg:max-w-4xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: false, amount: 0.1 }}
-          className="text-4xl md:text-5xl font-bold text-stone-800 mb-4"
+          className="text-4xl md:text-5xl lg:text-[2.45rem] font-bold text-zinc-100 mb-4"
         >
           Loved by Our Customers
         </motion.h2>
@@ -42,12 +42,12 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: false, amount: 0.1 }}
-        className="text-xl text-stone-600 mb-16">
+        className="text-xl lg:text-[1.22rem] text-zinc-400 mb-16 lg:mb-8">
           Real people. Real vibes. Real drinks.
         </motion.p>
 
         <div
-         className="grid grid-cols-1 md:grid-cols-3 gap-8">
+         className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-4">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
@@ -55,17 +55,17 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: false, amount: 0.1 }}
-              className="bg-white rounded-2xl shadow-xl p-8 border border-stone-200 hover:shadow-2xl transition"
+              className="bg-zinc-900 rounded-2xl shadow-xl p-8 lg:p-5 border border-zinc-800 hover:shadow-2xl transition"
             >
               <div className="flex justify-center mb-4">
                 {[...Array(t.rating)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-amber-500 text-amber-500" />
+                  <Star key={i} className="w-6 h-6 lg:w-5 lg:h-5 fill-amber-500 text-amber-500" />
                 ))}
               </div>
-              <p className="text-stone-700 italic mb-6 leading-relaxed">"{t.text}"</p>
+              <p className="text-zinc-300 italic mb-6 leading-relaxed lg:text-[0.92rem] lg:leading-8">"{t.text}"</p>
               <div>
-                <p className="font-semibold text-stone-900">{t.name}</p>
-                <p className="text-sm text-stone-500">{t.role}</p>
+                <p className="font-semibold text-zinc-100">{t.name}</p>
+                <p className="text-sm text-zinc-500">{t.role}</p>
               </div>
             </motion.div>
           ))}

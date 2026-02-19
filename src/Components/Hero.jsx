@@ -1,36 +1,34 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Award, Clock, Shield } from 'lucide-react';
-import Navbar from './Navbar';
-import { Link } from 'react-router-dom';
-import LiquorShop from '../Pages/Shop';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  
-  // Placeholder images - replace with your actual Images object
+  const [isDesktop, setIsDesktop] = useState(false);
+
   const slides = [
     {
-      image: 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=1600&auto=format&fit=crop',
-      title: 'Premium Liquor Collection',
-      subtitle: 'Curated Excellence for the Distinguished Palate',
-      ctaText: 'Explore Collection'
+      image: "https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=1600&auto=format&fit=crop",
+      title: "Premium Liquor Collection",
+      subtitle: "Curated Excellence for the Distinguished Palate",
+      ctaText: "Explore Collection",
     },
     {
-      image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600&auto=format&fit=crop',
-      title: 'Spirits That Define Moments',
-      subtitle: 'Crafted for Connoisseurs, Made for Memories',
-      ctaText: 'Shop Premium'
+      image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600&auto=format&fit=crop",
+      title: "Spirits That Define Moments",
+      subtitle: "Crafted for Connoisseurs, Made for Memories",
+      ctaText: "Shop Premium",
     },
     {
-      image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1600&auto=format&fit=crop',
-      title: 'Elevate Every Occasion',
-      subtitle: 'From Celebration to Sophistication',
-      ctaText: 'Discover Now'
-    }
+      image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1600&auto=format&fit=crop",
+      title: "Elevate Every Occasion",
+      subtitle: "From Celebration to Sophistication",
+      ctaText: "Discover Now",
+    },
   ];
 
-  // Auto-slide every 6 seconds
   React.useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
@@ -38,96 +36,95 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, [slides.length]);
 
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const handleChange = (event) => setIsDesktop(event.matches);
+
+    setIsDesktop(mediaQuery.matches);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, []);
+
+  const entryOffset = isDesktop ? 10 : 30;
+  const entryDuration = isDesktop ? 0.4 : 0.8;
+
   return (
-    <div className="relative w-full h-screen lg:h-[35rem] overflow-hidden">
-      {/* Add your Navbar component here when integrating into your project */}
+    <div className="relative w-full h-screen lg:h-[34rem] xl:h-[35rem] overflow-hidden">
       <Navbar />
-      
-      {/* Slides Container */}
+
       <AnimatePresence mode="wait">
         <motion.div
           key={activeSlide}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: 'easeInOut' }}
+          transition={{ duration: 1, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          {/* Background Image */}
           <div className="absolute inset-0">
             <img
               src={slides[activeSlide].image}
               alt={slides[activeSlide].title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover lg:contrast-[1.12] lg:brightness-[0.72] lg:saturate-110"
             />
-            {/* Gradient Overlay - darker for better text contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-            {/* Side Gradient for extra depth */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/58 via-black/36 to-black/72"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent lg:hidden"></div>
+            <div className="hidden lg:block absolute inset-y-0 left-0 w-[60%] bg-gradient-to-r from-black/78 via-black/50 to-transparent"></div>
+            <div className="hidden lg:block absolute inset-0 bg-[radial-gradient(circle_at_72%_38%,rgba(0,0,0,0)_18%,rgba(0,0,0,0.38)_100%)]"></div>
+            <div className="absolute inset-x-0 bottom-0 h-28 sm:h-32 lg:h-36 bg-gradient-to-t from-black/95 via-black/70 to-transparent backdrop-blur-[2px]"></div>
           </div>
 
-          {/* Content Container */}
           <div className="relative z-10 h-full flex items-center">
-            <div className="max-w-5xl mx-auto px-4 lg:px-8 w-full">
-              <div className="max-w-3xl lg:place-self-center">
-                {/* Title - Font: Playfair Display or similar elegant serif */}
-                <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
+            <div className="max-w-6xl mx-auto px-4 lg:px-8 xl:px-10 w-full">
+              <div className="max-w-3xl lg:max-w-[36rem] xl:max-w-[38rem] lg:pl-1">
+                <motion.div
+                  initial={{ opacity: 0, y: entryOffset }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-2xl md:text-5xl lg:text-3xl font-light text-white mb-4 md:mb-6 leading-tight"
-                  style={{ fontFamily: 'serif' }}
+                  transition={{ duration: entryDuration, delay: 0.06, ease: "easeOut" }}
+                  className="hidden lg:flex lg:items-center lg:gap-3 lg:mb-4"
+                >
+                  <span className="text-[0.66rem] uppercase tracking-[0.24em] text-amber-200/80">Curated Reserve</span>
+                  <span className="h-px w-12 bg-amber-200/45"></span>
+                </motion.div>
+
+                <motion.h1
+                  initial={{ opacity: 0, y: entryOffset }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: entryDuration, delay: 0.1, ease: "easeOut" }}
+                  className="text-2xl md:text-5xl lg:text-[3.35rem] xl:text-[3.55rem] font-light lg:font-semibold lg:font-serif text-white mb-4 md:mb-6 lg:mb-5 leading-tight lg:leading-[1.03] lg:tracking-[0.005em]"
+                  style={{ fontFamily: "serif" }}
                 >
                   {slides[activeSlide].title}
                 </motion.h1>
 
-                {/* Subtitle - Font: Light sans-serif */}
                 <motion.p
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: entryOffset }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="text-lg md:text-xl lg:text-xl text-gray-200 font-light mb-8 md:mb-12 leading-relaxed"
+                  transition={{ duration: entryDuration, delay: 0.2, ease: "easeOut" }}
+                  className="text-lg md:text-xl lg:text-[0.95rem] text-gray-200 font-light lg:font-normal mb-8 md:mb-12 lg:mb-8 leading-relaxed lg:leading-6 lg:tracking-[0.028em] lg:max-w-[30rem]"
                 >
                   {slides[activeSlide].subtitle}
                 </motion.p>
 
-                {/* CTA Buttons */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: entryOffset }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
+                  transition={{ duration: entryDuration, delay: 0.3, ease: "easeOut" }}
                   className="flex flex-col sm:flex-row gap-4"
                 >
-                  <button className="group px-8 py-4 bg-white text-black rounded-lg font-normal text-base hover:bg-gray-100 transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl translate-y-15 lg:translate-y-0">
-                    <Link to={'/Shop'}>{slides[activeSlide].ctaText}</Link>
-                    <ChevronRight 
-                      size={20} 
-                      className="group-hover:translate-x-1 transition-transform duration-300" 
-                    />
-                  </button>
-                  
-                  
-                </motion.div>
-
-                {/* Trust Badges */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  className="absolute bottom-20 md:mt-16 flex flex-wrap gap-6 md:gap-8 "
-                >
-                  <div className="flex items-center space-x-2 text-white/90 opacity-0 lg:opacity-100">
-                    <Award size={20} />
-                    <span className="text-sm font-light">Premium Selection</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-white/90 opacity-0 lg:opacity-100">
-                    <Clock size={20} />
-                    <span className="text-sm font-light">Fast Delivery</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-white/90 opacity-0 lg:opacity-100">
-                    <Shield size={20} />
-                    <span className="text-sm font-light">Secure Shopping</span>
-                  </div>
+                  <Link
+                    to="/Shop"
+                    className="btn-arcade group w-fit translate-y-15 lg:translate-y-0 lg:px-10 lg:py-[0.98rem]"
+                  >
+                    <span>{slides[activeSlide].ctaText}</span>
+                    <ChevronRight size={20} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
                 </motion.div>
               </div>
             </div>
@@ -135,7 +132,6 @@ const Hero = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Slide Indicators */}
       <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
         {slides.map((_, index) => (
           <button
@@ -143,46 +139,30 @@ const Hero = () => {
             onClick={() => setActiveSlide(index)}
             className={`transition-all duration-300 rounded-full ${
               index === activeSlide
-                ? 'w-12 h-2 bg-white'
-                : 'w-2 h-2 bg-white/50 hover:bg-white/70'
+                ? "h-2.5 w-11 bg-amber-100 shadow-[0_0_16px_-6px_rgba(251,191,36,0.85)]"
+                : "h-2.5 w-2.5 bg-zinc-100/55 hover:bg-amber-100/80"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Slide Navigation Arrows - Desktop Only */}
       <button
         onClick={() => setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 text-white"
+        className="btn-arcade-icon btn-arcade-icon-sm hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 z-20"
         aria-label="Previous slide"
       >
-        <ChevronRight size={24} className="rotate-180" />
-      </button>
-      
-      <button
-        onClick={() => setActiveSlide((prev) => (prev + 1) % slides.length)}
-        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 text-white"
-        aria-label="Next slide"
-      >
-        <ChevronRight size={24} />
+        <ChevronRight size={18} className="rotate-180" />
       </button>
 
-      {/* Decorative Curved Bottom Edge */}
-      <div 
-        className="absolute -bottom-13 left-0 right-0 h-32 md:h-40 pointer-events-none"
-        style={{
-          background: 'white',
-          maskImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 1440 100%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath fill=%27black%27 d=%27M0,50 Q360,0 720,50 Q1080,100 1440,50 L1440,100 L0,100 Z%27/%3E%3C/svg%3E")',
-          maskSize: '100% 100%',
-          maskRepeat: 'no-repeat',
-          maskPosition: 'bottom',
-          WebkitMaskImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 1440 100%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath fill=%27black%27 d=%27M0,50 Q360,0 720,50 Q1080,100 1440,50 L1440,100 L0,100 Z%27/%3E%3C/svg%3E")',
-          WebkitMaskSize: '100% 100%',
-          WebkitMaskRepeat: 'no-repeat',
-          WebkitMaskPosition: 'bottom',
-        }}
-      />
+      <button
+        onClick={() => setActiveSlide((prev) => (prev + 1) % slides.length)}
+        className="btn-arcade-icon btn-arcade-icon-sm hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 z-20"
+        aria-label="Next slide"
+      >
+        <ChevronRight size={18} />
+      </button>
+
     </div>
   );
 };
